@@ -594,7 +594,7 @@ export function WayfernConfigForm({
           ))}
 
         <fieldset
-          disabled={isEditingDisabled || limitedMode}
+          disabled={isEditingDisabled}
           className="space-y-6"
         >
           {/* User Agent and Platform */}
@@ -1416,23 +1416,6 @@ export function WayfernConfigForm({
             </div>
           </div>
         </fieldset>
-        {limitedMode && (
-          <>
-            <div className="absolute inset-0 z-1 bg-background/30 backdrop-blur-[6px]" />
-            <div className="absolute inset-y-0 left-0 z-2 w-6 bg-linear-to-r from-background to-transparent" />
-            <div className="absolute inset-y-0 right-0 z-2 w-6 bg-linear-to-l from-background to-transparent" />
-            <div className="absolute inset-x-0 top-0 z-2 h-6 bg-linear-to-b from-background to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 z-2 h-6 bg-linear-to-t from-background to-transparent" />
-            <div className="absolute inset-0 z-3 flex items-center justify-center">
-              <div className="flex items-center gap-2 rounded-md bg-background/80 px-3 py-1.5">
-                <ProBadge />
-                <span className="text-sm font-medium text-muted-foreground">
-                  {t("fingerprint.proFeature")}
-                </span>
-              </div>
-            </div>
-          </>
-        )}
       </div>
     </div>
   );
@@ -1587,7 +1570,7 @@ export function WayfernConfigForm({
               }
             >
               <fieldset
-                disabled={isEditingDisabled || limitedMode}
+                disabled={isEditingDisabled}
                 className="space-y-3"
               >
                 <Label>{t("fingerprint.screenResolution")}</Label>
@@ -1678,23 +1661,6 @@ export function WayfernConfigForm({
                   </div>
                 </div>
               </fieldset>
-              {limitedMode && (
-                <>
-                  <div className="absolute inset-0 z-1 bg-background/30 backdrop-blur-[6px]" />
-                  <div className="absolute inset-y-0 left-0 z-2 w-6 bg-linear-to-r from-background to-transparent" />
-                  <div className="absolute inset-y-0 right-0 z-2 w-6 bg-linear-to-l from-background to-transparent" />
-                  <div className="absolute inset-x-0 top-0 z-2 h-6 bg-linear-to-b from-background to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 z-2 h-6 bg-linear-to-t from-background to-transparent" />
-                  <div className="absolute inset-0 z-3 flex items-center justify-center">
-                    <div className="flex items-center gap-2 rounded-md bg-background/80 px-3 py-1.5">
-                      <ProBadge />
-                      <span className="text-sm font-medium text-muted-foreground">
-                        {t("fingerprint.proFeature")}
-                      </span>
-                    </div>
-                  </div>
-                </>
-              )}
             </div>
           </TabsContent>
 

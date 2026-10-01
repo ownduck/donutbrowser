@@ -2554,14 +2554,11 @@ pub async fn update_wayfern_config(
   profile_id: String,
   config: WayfernConfig,
 ) -> Result<(), String> {
-  if (config.fingerprint.is_some() || config.identity_overrides.is_some())
-    && !crate::cloud_auth::CLOUD_AUTH
-      .can_use_cross_os_fingerprints()
-      .await
-  {
-    return Err(serde_json::json!({ "code": "FINGERPRINT_REQUIRES_PRO" }).to_string());
-  }
-
+  // NOTE: the blanket "any fingerprint requires cross_os_fingerprints" gate was
+  // intentionally removed for local evaluation. Same-OS fingerprint editing is
+  // now allowed for non-entitled users; cross-OS claims are still blocked by the
+  // OS-specific check below (gate 2) and by the launch-time pre-check in
+  // wayfern_manager.rs, so the Pro wall for cross-OS remains intact.
   if !crate::cloud_auth::CLOUD_AUTH
     .is_fingerprint_os_allowed(config.os.as_deref())
     .await

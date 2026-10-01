@@ -25,7 +25,6 @@ import {
   LuGroup,
   LuKey,
   LuLink,
-  LuLock,
   LuLockOpen,
   LuPlus,
   LuPuzzle,
@@ -749,9 +748,7 @@ function ProfileInfoContents({
       onClick: () => {
         handleAction(() => onConfigureWayfern?.(profile));
       },
-      // Viewing and editing fingerprints both require an active paid plan.
-      disabled: isDisabled || !crossOsUnlocked,
-      proBadge: !crossOsUnlocked,
+      disabled: isDisabled,
       runningBadge: isRunning,
       hidden: !isWayfern || !onConfigureWayfern,
     },
@@ -762,8 +759,7 @@ function ProfileInfoContents({
       onClick: () => {
         handleAction(() => onLaunchWithSync?.(profile));
       },
-      disabled: isDisabled || isRunning || !crossOsUnlocked,
-      proBadge: !crossOsUnlocked,
+      disabled: isDisabled || isRunning,
       hidden: profile.browser !== "wayfern" || !onLaunchWithSync,
     },
     {
@@ -2243,20 +2239,6 @@ function FingerprintSectionInline({
         </div>
         <p className="text-xs text-muted-foreground">
           {t("profileInfo.fingerprint.notSupported")}
-        </p>
-      </div>
-    );
-  }
-
-  if (!crossOsUnlocked) {
-    return (
-      <div className="flex flex-col items-center gap-3 rounded-lg border p-6 text-center">
-        <LuLock className="size-4 shrink-0 text-muted-foreground" />
-        <h3 className="text-sm font-medium text-foreground">
-          {t("profileInfo.fingerprint.lockedTitle")}
-        </h3>
-        <p className="max-w-[48ch] text-sm text-pretty text-muted-foreground">
-          {t("profileInfo.fingerprint.lockedDescription")}
         </p>
       </div>
     );
