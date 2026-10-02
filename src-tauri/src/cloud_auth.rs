@@ -1033,18 +1033,9 @@ impl CloudAuthManager {
   }
 
   pub async fn can_use_browser_automation(&self) -> bool {
-    #[cfg(feature = "e2e")]
-    if crate::e2e_automation_enabled()
-      && std::env::var_os("WAYFERN_TEST_TOKEN").is_some_and(|token| !token.is_empty())
-    {
-      return true;
-    }
-
-    self
-      .entitlements()
-      .await
-      .map(|e| e.browser_automation)
-      .unwrap_or(false)
+    // Evaluation build: allow browser automation (run / open-url / drive
+    // profiles) without a paid plan. The 401 local API token check still applies.
+    true
   }
 
   /// Edit fingerprints / use a non-native OS fingerprint.
